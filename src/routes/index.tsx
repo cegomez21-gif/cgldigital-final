@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 import heroMockup from "@/assets/hero-mockup.jpg";
-import cglLogo from "@/assets/cgl-logo-dark.png.asset.json";
+import cglLogo from "@/assets/cgl-logo-dark.png";
 
 export const Route = createFileRoute("/")({
   component: Landing,
