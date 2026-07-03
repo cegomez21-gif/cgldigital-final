@@ -69,11 +69,11 @@ function Landing() {
 function Logo() {
   return (
     <a href="#top" className="flex items-center gap-2.5">
-      <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-full gradient-violet text-sm font-bold text-white">
-        C
-        <span className="absolute inset-0 -z-10 rounded-full blur-md gradient-violet opacity-60" />
-      </span>
-      <span className="text-[15px] font-semibold tracking-tight">CGL Estudio Digital</span>
+      <img
+        src={cglLogo.url}
+        alt="CGL Estudio Digital"
+        className="h-9 w-auto object-contain"
+      />
     </a>
   );
 }
@@ -81,6 +81,7 @@ function Logo() {
 function Nav() {
   const links = [
     { href: "#top", label: "Inicio" },
+    { href: "#servicios", label: "Servicios" },
     { href: "#precios", label: "Precios" },
     { href: "#contacto", label: "Contacto" },
   ];
