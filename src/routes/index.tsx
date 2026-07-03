@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 import heroMockup from "@/assets/hero-mockup.jpg";
-import cglLogo from "@/assets/cgl-logo-dark.png.asset.json";
+import cglLogo from "@/assets/cgl-logo-dark.png";
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -69,7 +69,7 @@ function Logo() {
   return (
     <a href="#top" className="flex items-center gap-2.5">
       <img
-        src={cglLogo.url}
+        src={cglLogo}
         alt="CGL Estudio Digital"
         className="h-[84px] w-auto object-contain"
       />
