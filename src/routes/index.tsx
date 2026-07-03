@@ -72,7 +72,7 @@ function Logo() {
       <img
         src={cglLogo.url}
         alt="CGL Estudio Digital"
-        className="h-9 w-auto object-contain"
+        className="h-[58px] w-auto object-contain"
       />
     </a>
   );
