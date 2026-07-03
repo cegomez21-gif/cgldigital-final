@@ -69,7 +69,7 @@ function Logo() {
   return (
     <a href="#top" className="flex items-center gap-2.5">
       <img
-        src={cglLogo.url}
+        src={cglLogo}
         alt="CGL Estudio Digital"
         className="h-[84px] w-auto object-contain"
       />
