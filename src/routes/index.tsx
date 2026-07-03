@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Layout,
   Building2,
-  RefreshCw,
   MessageCircle,
   Mail,
   Server,
