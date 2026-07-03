@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Layout,
   Building2,
-  RefreshCw,
   MessageCircle,
   Mail,
   Server,
@@ -72,7 +71,7 @@ function Logo() {
       <img
         src={cglLogo.url}
         alt="CGL Estudio Digital"
-        className="h-[58px] w-auto object-contain"
+        className="h-[70px] w-auto object-contain"
       />
     </a>
   );
@@ -100,8 +99,8 @@ function Nav() {
           href="#contacto"
           className="group inline-flex shrink-0 items-center gap-1.5 rounded-full gradient-violet px-4 py-2 text-sm font-medium text-white shadow-[0_8px_30px_-6px_rgba(124,58,237,0.6)] transition-transform hover:scale-[1.02]"
         >
-          <span className="hidden sm:inline">Solicitar presupuesto</span>
-          <span className="sm:hidden">Presupuesto</span>
+          <span className="hidden sm:inline">Cotizar proyecto</span>
+          <span className="sm:hidden">Cotizar</span>
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </a>
       </div>
@@ -129,7 +128,7 @@ function Hero() {
             href="#contacto"
             className="group inline-flex items-center gap-2 rounded-full gradient-violet px-6 py-3.5 text-sm font-medium text-white shadow-[0_10px_40px_-8px_rgba(124,58,237,0.7)] transition-transform hover:scale-[1.02]"
           >
-            Solicitar presupuesto
+            Cotizar proyecto
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </a>
           <a
@@ -174,7 +173,6 @@ function Services() {
   const items = [
     { icon: Layout, title: "Landing Pages", desc: "Páginas de una sola sección ideales para promocionar productos, servicios o campañas." },
     { icon: Building2, title: "Sitios Web Corporativos", desc: "Páginas profesionales para empresas con varias secciones y una imagen moderna." },
-    { icon: RefreshCw, title: "Rediseño Web", desc: "Renovamos sitios web antiguos con un diseño actual, moderno y optimizado." },
     { icon: MessageCircle, title: "Integración de WhatsApp", desc: "Botón flotante para que tus clientes puedan comunicarse rápidamente." },
     { icon: Mail, title: "Formularios de Contacto", desc: "Recibe consultas directamente en tu correo mediante formularios personalizados." },
     { icon: Server, title: "Asesoría en Dominio y Hosting", desc: "Te ayudamos a elegir y configurar el dominio y el hosting más adecuado para tu proyecto." },
@@ -293,7 +291,7 @@ function Pricing() {
                   : "border border-white/10 bg-white/[0.03] text-foreground hover:bg-white/[0.06]"
               }`}
             >
-              Solicitar presupuesto
+              Cotizar proyecto
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>
@@ -424,8 +422,9 @@ function FloatingWhatsApp() {
 function Footer() {
   return (
     <footer className="mx-auto max-w-6xl border-t border-white/[0.06] px-4 py-10">
-      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+      <div className="flex flex-col items-center gap-3 text-center">
         <Logo />
+        <p className="text-xs text-muted-foreground">Landing Pages • Sitios Web Corporativos • Chile</p>
         <p className="text-xs text-muted-foreground">© 2026 CGL Estudio Digital. Todos los derechos reservados.</p>
       </div>
     </footer>
