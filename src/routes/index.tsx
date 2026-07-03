@@ -173,7 +173,6 @@ function Services() {
   const items = [
     { icon: Layout, title: "Landing Pages", desc: "Páginas de una sola sección ideales para promocionar productos, servicios o campañas." },
     { icon: Building2, title: "Sitios Web Corporativos", desc: "Páginas profesionales para empresas con varias secciones y una imagen moderna." },
-    { icon: RefreshCw, title: "Rediseño Web", desc: "Renovamos sitios web antiguos con un diseño actual, moderno y optimizado." },
     { icon: MessageCircle, title: "Integración de WhatsApp", desc: "Botón flotante para que tus clientes puedan comunicarse rápidamente." },
     { icon: Mail, title: "Formularios de Contacto", desc: "Recibe consultas directamente en tu correo mediante formularios personalizados." },
     { icon: Server, title: "Asesoría en Dominio y Hosting", desc: "Te ayudamos a elegir y configurar el dominio y el hosting más adecuado para tu proyecto." },
