@@ -306,12 +306,25 @@ function Pricing() {
 
 function Contact() {
   const [sent, setSent] = useState(false);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (response.ok) {
     setSent(true);
     setTimeout(() => setSent(false), 3500);
-    (e.currentTarget as HTMLFormElement).reset();
-  };
+    form.reset();
+  } else {
+    alert("Hubo un error al enviar el formulario. Intenta nuevamente.");
+  }
+};
   return (
     <section id="contacto" className="mx-auto max-w-6xl px-4 py-24 sm:py-32">
       <div data-reveal className="grid grid-cols-1 gap-12 rounded-3xl border border-white/[0.06] bg-gradient-to-b from-white/[0.03] to-transparent p-8 sm:p-12 lg:grid-cols-2 lg:gap-16">
@@ -338,6 +351,11 @@ function Contact() {
         </div>
 
         <form onSubmit={onSubmit} className="rounded-2xl border border-white/[0.06] bg-[#0d0d0d]/70 p-6 backdrop-blur-sm sm:p-8">
+          <input
+  type="hidden"
+  name="access_key"
+  value="c234cc7e-8e71-4171-ba82-99dff6d86a86"
+/>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Field label="Nombre" name="name" placeholder="Tu nombre" required />
             <Field label="Correo electrónico" name="email" type="email" placeholder="tu@empresa.com" required />
