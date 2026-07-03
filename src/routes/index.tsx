@@ -327,7 +327,7 @@ function Contact() {
             ¿Necesitas una página web para tu empresa o emprendimiento? Completa el formulario o escríbenos por WhatsApp y te enviaremos una propuesta personalizada.
           </p>
           <a
-            href="https://wa.me/"
+            href="https://wa.me/56976163109?text=Hola%2C%20quiero%20cotizar%20una%20p%C3%A1gina%20web%20con%20CGL%20Digital."
             target="_blank"
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-medium text-white shadow-[0_10px_40px_-8px_rgba(37,211,102,0.55)] transition-transform hover:scale-[1.02]"
@@ -408,7 +408,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 function FloatingWhatsApp() {
   return (
     <a
-      href="https://wa.me/"
+      href="https://wa.me/56976163109?text=Hola%2C%20quiero%20cotizar%20una%20p%C3%A1gina%20web%20con%20CGL%20Digital."
       target="_blank"
       rel="noreferrer"
       aria-label="Hablar por WhatsApp"
