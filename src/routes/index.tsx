@@ -219,7 +219,7 @@ function Pricing() {
     },
     {
       name: "Sitio Web Corporativo",
-      price: "$350.000",
+      price: "$300.000",
       currency: "CLP",
       idealFor: [],
       features: [
