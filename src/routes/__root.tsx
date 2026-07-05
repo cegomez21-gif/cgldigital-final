@@ -82,7 +82,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "CGL Digital — Premium Landing Pages & Web Design Studio" },
       { property: "og:description", content: "Modern, fast and conversion-focused websites for businesses that want to stand out online." },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "/og-image.jpg" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
