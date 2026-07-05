@@ -71,7 +71,7 @@ function Logo() {
       <img
         src={cglLogo}
         alt="CGL Estudio Digital"
-        className="h-[84px] w-auto object-contain"
+        className="h-16 w-auto object-contain"
       />
     </a>
   );
@@ -219,7 +219,7 @@ function Pricing() {
     },
     {
       name: "Sitio Web Corporativo",
-      price: "$350.000",
+      price: "$300.000",
       currency: "CLP",
       idealFor: [],
       features: [
