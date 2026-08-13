@@ -16,7 +16,7 @@ import {
   X,
 } from "lucide-react";
 
-import soporteImg from "@/assets/Flyer_Soporte.png";
+import heroComputer from "@/assets/ChatGPT_Image_13_ago_2026,_12_46_09_a.m.png";
 import cglLogo from "@/assets/cgl-logo-dark.png";
 
 const WHATSAPP_URL =
@@ -216,19 +216,14 @@ function Hero() {
         </p>
       </div>
 
-      <div data-reveal className="relative min-w-0">
-        <div className="absolute inset-6 -z-10 rounded-[2.5rem] bg-[radial-gradient(closest-side,rgba(31,107,255,0.3),transparent)] blur-3xl" />
-        <div className="relative overflow-hidden rounded-3xl border border-brand/20 bg-[#071329] p-2 shadow-[0_24px_80px_-28px_rgba(31,107,255,0.8)]">
-          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-brand-cyan to-transparent" />
-          <img
-            src={soporteImg}
-            alt="Computador de escritorio con monitor, teclado y mouse iluminado en azul"
-            width={1024}
-            height={1536}
-            className="aspect-[4/5] w-full rounded-2xl object-cover object-center sm:aspect-[5/6] lg:aspect-[4/5]"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#05070d]/40 via-transparent to-transparent" />
-        </div>
+      <div data-reveal className="flex min-w-0 items-center justify-center">
+        <img
+          src={heroComputer}
+          alt="Computador de escritorio negro con monitor, teclado y mouse iluminados en azul"
+          width={1536}
+          height={1024}
+          className="h-auto max-h-[560px] w-full object-contain"
+        />
       </div>
     </section>
   );
