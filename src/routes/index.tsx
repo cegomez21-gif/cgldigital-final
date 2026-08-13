@@ -16,7 +16,7 @@ import {
   X,
 } from "lucide-react";
 
-import soporteImg from "@/assets/soporte-ti.jpg";
+import soporteImg from "@/assets/Flyer_Soporte.png";
 import cglLogo from "@/assets/cgl-logo-dark.png";
 
 const WHATSAPP_URL =
@@ -88,7 +88,6 @@ function Landing() {
           <LandingPages />
           <SoporteTI />
           <Diferenciadores />
-          <Proceso />
           <Contacto />
         </main>
         <Footer />
@@ -109,7 +108,7 @@ const NAV_LINKS = [
 function Logo() {
   return (
     <a href="#inicio" className="flex shrink-0 items-center gap-2.5">
-      <img src={cglLogo} alt="CGL Digital" className="h-11 w-auto object-contain sm:h-12" />
+      <img src={cglLogo} alt="CGL Digital" className="logo-blue h-11 w-auto object-contain sm:h-12" />
     </a>
   );
 }
@@ -399,31 +398,6 @@ function Diferenciadores() {
   );
 }
 
-function Proceso() {
-  const steps = [
-    { n: "01", title: "Cuéntanos lo que necesitas" },
-    { n: "02", title: "Proponemos una solución" },
-    { n: "03", title: "Lo hacemos realidad" },
-  ];
-
-  return (
-    <section className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
-      <SectionHeading eyebrow="Proceso" title="Cómo trabajamos" />
-      <div className="relative mt-14">
-        <div aria-hidden className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-brand/40 to-transparent lg:block" />
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {steps.map((step) => (
-            <div key={step.n} data-reveal className="relative">
-              <div className="grid h-12 w-12 place-items-center rounded-full border border-brand/40 bg-[#05070d] font-display text-sm font-semibold text-brand-cyan">{step.n}</div>
-              <h3 className="mt-5 text-base font-semibold uppercase tracking-wide">{step.title}</h3>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Contacto() {
   const [sent, setSent] = useState(false);
 
@@ -527,7 +501,7 @@ function Footer() {
     <footer className="border-t border-white/[0.06]">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-3">
         <div>
-          <img src={cglLogo} alt="CGL Digital" className="h-11 w-auto object-contain" />
+          <img src={cglLogo} alt="CGL Digital" className="logo-blue h-11 w-auto object-contain" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">Soluciones digitales para emprendedores y empresas.</p>
         </div>
         <nav className="grid grid-cols-2 gap-x-6 gap-y-2.5 self-start">
