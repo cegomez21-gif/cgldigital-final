@@ -2,50 +2,42 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
-  Monitor,
-  Headset,
   Check,
-  Send,
-  Menu,
-  X,
-  Wifi,
-  Wrench,
-  ShieldCheck,
   Cpu,
-  MessageSquare,
+  Headset,
   LifeBuoy,
   Mail,
-  Globe,
+  Menu,
+  MessageSquare,
+  Monitor,
+  Send,
+  ShieldCheck,
+  Wrench,
+  X,
 } from "lucide-react";
 
-import heroDesk from "@/assets/hero-desk.jpg";
 import soporteImg from "@/assets/soporte-ti.jpg";
 import cglLogo from "@/assets/cgl-logo-dark.png";
-import pVet from "@/assets/portfolio-vet.jpg";
-import pDental from "@/assets/portfolio-dental.jpg";
-import pCorporate from "@/assets/portfolio-corporate.jpg";
-import pRestaurant from "@/assets/portfolio-restaurant.jpg";
-import pRealestate from "@/assets/portfolio-realestate.jpg";
 
 const WHATSAPP_URL =
-  "https://wa.me/56976163109?text=Hola%2C%20quiero%20cotizar%20una%20p%C3%A1gina%20web%20con%20CGL%20Digital.";
+  "https://wa.me/56976163109?text=Hola%2C%20quiero%20cotizar%20una%20soluci%C3%B3n%20con%20CGL%20Digital.";
 const WHATSAPP_SOPORTE =
   "https://wa.me/56976163109?text=Hola%2C%20necesito%20soporte%20TI%20con%20CGL%20Digital.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CGL Digital | Diseño Web y Soporte TI para empresas en Chile" },
+      { title: "CGL Digital | Landing Pages y Soporte TI" },
       {
         name: "description",
         content:
-          "Soluciones digitales para emprendedores y empresas en Chile: diseño web profesional, landing pages, sitios corporativos y soporte TI remoto.",
+          "Landing Pages profesionales y soporte TI para emprendedores y empresas en Santiago y todo Chile.",
       },
-      { property: "og:title", content: "CGL Digital | Diseño Web y Soporte TI en Chile" },
+      { property: "og:title", content: "CGL Digital | Landing Pages y Soporte TI" },
       {
         property: "og:description",
         content:
-          "Diseño web profesional y soporte TI para emprendedores y empresas. Proyectos a medida, atención personalizada y acompañamiento continuo.",
+          "Soluciones digitales para emprendedores y empresas: Landing Pages que convierten y soporte TI cercano.",
       },
     ],
   }),
@@ -54,23 +46,27 @@ export const Route = createFileRoute("/")({
 
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("fade-up");
-            io.unobserve(e.target);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-up");
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1 },
     );
-    el.querySelectorAll("[data-reveal]").forEach((n) => io.observe(n));
-    return () => io.disconnect();
+
+    element.querySelectorAll("[data-reveal]").forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
   }, []);
+
   return ref;
 }
 
@@ -79,21 +75,20 @@ function Landing() {
 
   return (
     <div ref={rootRef} className="relative min-h-screen overflow-x-hidden bg-[#05070d] text-foreground">
-      <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <div className="absolute -top-48 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(31,107,255,0.18),transparent)] blur-3xl" />
-        <div className="absolute top-[55%] -right-40 h-[460px] w-[460px] rounded-full bg-[radial-gradient(closest-side,rgba(42,168,232,0.12),transparent)] blur-3xl" />
+        <div className="absolute right-[-12rem] top-[52%] h-[460px] w-[460px] rounded-full bg-[radial-gradient(closest-side,rgba(42,168,232,0.1),transparent)] blur-3xl" />
+        <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(42,168,232,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(42,168,232,0.08)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       </div>
 
       <div className="relative z-10">
         <Nav />
         <main>
           <Hero />
-          <Servicios />
-          <Diferenciadores />
-          <Portafolio />
+          <LandingPages />
           <SoporteTI />
+          <Diferenciadores />
           <Proceso />
-          <Nosotros />
           <Contacto />
         </main>
         <Footer />
@@ -106,10 +101,8 @@ function Landing() {
 
 const NAV_LINKS = [
   { href: "#inicio", label: "Inicio" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#portafolio", label: "Portafolio" },
+  { href: "#landing-pages", label: "Landing Pages" },
   { href: "#soporte", label: "Soporte TI" },
-  { href: "#nosotros", label: "Nosotros" },
   { href: "#contacto", label: "Contacto" },
 ];
 
@@ -123,18 +116,19 @@ function Logo() {
 
 function Nav() {
   const [open, setOpen] = useState(false);
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/[0.06] bg-[#05070d]/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-white/[0.06] bg-[#05070d]/80 backdrop-blur-xl">
       <div className="mx-auto grid w-full max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 lg:flex lg:justify-between">
         <Logo />
         <nav className="hidden items-center gap-7 lg:flex">
-          {NAV_LINKS.map((l) => (
+          {NAV_LINKS.map((link) => (
             <a
-              key={l.href}
-              href={l.href}
+              key={link.href}
+              href={link.href}
               className="text-[13px] font-medium uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
             >
-              {l.label}
+              {link.label}
             </a>
           ))}
         </nav>
@@ -148,7 +142,7 @@ function Nav() {
           </a>
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpen((value) => !value)}
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
             className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.03] text-foreground lg:hidden"
@@ -161,14 +155,14 @@ function Nav() {
       {open && (
         <div className="border-t border-white/[0.06] bg-[#05070d]/95 px-4 pb-5 pt-3 lg:hidden">
           <nav className="flex flex-col">
-            {NAV_LINKS.map((l) => (
+            {NAV_LINKS.map((link) => (
               <a
-                key={l.href}
-                href={l.href}
+                key={link.href}
+                href={link.href}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-2 py-3 text-sm font-medium uppercase tracking-wide text-muted-foreground transition-colors hover:bg-white/[0.04] hover:text-foreground"
               >
-                {l.label}
+                {link.label}
               </a>
             ))}
             <a
@@ -190,19 +184,18 @@ function Hero() {
   return (
     <section
       id="inicio"
-      className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 pb-20 pt-14 sm:pt-20 lg:min-h-[calc(100vh-72px)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-12 lg:pb-24"
+      className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 pb-20 pt-14 sm:pt-20 lg:min-h-[calc(100vh-72px)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-14 lg:pb-24"
     >
       <div data-reveal className="min-w-0">
         <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-brand-cyan [animation:pulseGlow_2.4s_ease-in-out_infinite]" />
           Soluciones digitales
         </span>
-        <h1 className="mt-6 text-[2.25rem] font-semibold leading-[1.07] tracking-tight sm:text-5xl lg:text-[3.5rem]">
-          Soluciones <span className="gradient-text">digitales</span> que impulsan tu{" "}
-          <span className="gradient-text">negocio</span>
+        <h1 className="mt-6 text-[2.35rem] font-semibold leading-[1.06] tracking-tight sm:text-5xl lg:text-[3.7rem]">
+          Soluciones <span className="gradient-text">digitales</span> que impulsan tu <span className="gradient-text">negocio</span>
         </h1>
         <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Diseño web profesional y soporte TI para emprendedores y empresas.
+          Landing Pages profesionales y soporte TI para emprendedores y empresas.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <a
@@ -213,40 +206,36 @@ function Hero() {
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </a>
           <a
-            href="#servicios"
+            href="#landing-pages"
             className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-white/[0.07]"
           >
             Ver servicios
           </a>
         </div>
         <p className="mt-7 text-xs text-muted-foreground sm:text-sm">
-          Diseño profesional · Atención personalizada · Soporte cercano
+          Diseño personalizado · Atención directa · Soporte cercano
         </p>
       </div>
 
       <div data-reveal className="relative min-w-0">
-        <div className="absolute inset-6 -z-10 rounded-[2.5rem] bg-[radial-gradient(closest-side,rgba(31,107,255,0.28),transparent)] blur-3xl" />
-        <img
-          src={heroDesk}
-          alt="Equipo de escritorio mostrando un sitio web profesional desarrollado por CGL Digital"
-          width={1280}
-          height={1024}
-          className="w-full rounded-2xl border border-white/[0.07] object-cover [mask-image:radial-gradient(120%_110%_at_55%_45%,#000_60%,transparent_100%)]"
-        />
+        <div className="absolute inset-6 -z-10 rounded-[2.5rem] bg-[radial-gradient(closest-side,rgba(31,107,255,0.3),transparent)] blur-3xl" />
+        <div className="relative overflow-hidden rounded-3xl border border-brand/20 bg-[#071329] p-2 shadow-[0_24px_80px_-28px_rgba(31,107,255,0.8)]">
+          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-brand-cyan to-transparent" />
+          <img
+            src={soporteImg}
+            alt="Computador de escritorio con monitor, teclado y mouse iluminado en azul"
+            width={1024}
+            height={1536}
+            className="aspect-[4/5] w-full rounded-2xl object-cover object-center sm:aspect-[5/6] lg:aspect-[4/5]"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#05070d]/40 via-transparent to-transparent" />
+        </div>
       </div>
     </section>
   );
 }
 
-function SectionHeading({
-  eyebrow,
-  title,
-  subtitle,
-}: {
-  eyebrow: string;
-  title: string;
-  subtitle?: string;
-}) {
+function SectionHeading({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle?: string }) {
   return (
     <div data-reveal className="mx-auto max-w-2xl text-center">
       <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
@@ -259,82 +248,125 @@ function SectionHeading({
   );
 }
 
-function Servicios() {
-  const cards = [
-    {
-      icon: Monitor,
-      title: "Diseño Web",
-      desc: "Creamos sitios web modernos, rápidos y adaptados a celulares para que tu negocio tenga una presencia profesional en Internet.",
-      features: [
-        "Landing Pages",
-        "Sitios web profesionales",
-        "Diseño responsive",
-        "Integración con WhatsApp",
-        "Formularios de contacto",
-        "Optimización y rendimiento",
-        "Dominio y hosting",
-        "Diseño personalizado",
-      ],
-      cta: "Ver servicio",
-      href: "#portafolio",
-    },
-    {
-      icon: Headset,
-      title: "Soporte TI",
-      desc: "Te ayudamos a resolver problemas tecnológicos y mantener tus equipos y sistemas funcionando correctamente.",
-      features: [
-        "Soporte remoto",
-        "Diagnóstico de problemas",
-        "Configuración de equipos",
-        "Instalación de software",
-        "Windows",
-        "Redes",
-        "Microsoft 365",
-        "Asistencia a usuarios",
-        "Mantenimiento preventivo",
-      ],
-      cta: "Solicitar soporte",
-      href: "#soporte",
-    },
+function LandingPages() {
+  const features = [
+    "Diseño personalizado",
+    "Diseño 100% responsive",
+    "Integración con WhatsApp",
+    "Formularios de contacto",
+    "Llamados a la acción",
+    "Optimización y rendimiento",
+    "Integración con redes sociales",
+    "SEO básico",
   ];
 
   return (
-    <section id="servicios" className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
+    <section id="landing-pages" className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
       <SectionHeading
-        eyebrow="Servicios"
-        title="¿Qué podemos hacer por tu negocio?"
-        subtitle="Soluciones digitales pensadas para ayudarte a crecer, mejorar tu presencia online y resolver tus necesidades tecnológicas."
+        eyebrow="Landing Pages"
+        title="LANDING PAGES PROFESIONALES"
+        subtitle="Creamos Landing Pages modernas, rápidas y adaptadas a celulares para convertir visitantes en clientes."
       />
-      <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {cards.map((c) => (
-          <div
-            key={c.title}
-            data-reveal
-            className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] p-7 transition-all duration-500 hover:-translate-y-1 hover:border-brand/50 sm:p-9"
-          >
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(31,107,255,0.16),transparent_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="grid h-12 w-12 place-items-center rounded-xl border border-white/10 bg-white/[0.03] text-brand-cyan">
-              <c.icon className="h-6 w-6" strokeWidth={1.5} />
+      <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+        <div data-reveal className="group relative overflow-hidden rounded-3xl border border-brand/25 bg-gradient-to-br from-[#0b1e48] via-[#081326] to-[#070a12] p-7 sm:p-10">
+          <div className="absolute -right-20 -top-24 h-72 w-72 rounded-full bg-brand/20 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
+          <div className="relative">
+            <div className="grid h-12 w-12 place-items-center rounded-xl border border-brand-cyan/30 bg-brand-cyan/10 text-brand-cyan">
+              <Monitor className="h-6 w-6" strokeWidth={1.5} />
             </div>
-            <h3 className="mt-6 text-xl font-semibold uppercase tracking-wide sm:text-2xl">{c.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{c.desc}</p>
-            <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-              {c.features.map((f) => (
-                <li key={f} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+            <h3 className="mt-6 text-2xl font-semibold uppercase tracking-wide sm:text-3xl">Una página enfocada en resultados</h3>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
+              Una Landing Page presenta un producto, servicio, emprendimiento o campaña con un objetivo claro: generar contactos y nuevos clientes.
+            </p>
+            <ul className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {features.map((feature) => (
+                <li key={feature} className="flex items-start gap-2.5 text-sm text-muted-foreground">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-cyan" strokeWidth={2.5} />
-                  <span>{f}</span>
+                  <span>{feature}</span>
                 </li>
               ))}
             </ul>
             <a
-              href={c.href}
-              className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-white/[0.07]"
+              href="#contacto"
+              className="mt-9 inline-flex min-h-12 items-center gap-2 rounded-full gradient-blue px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_12px_40px_-14px_rgba(31,107,255,0.9)] transition-transform hover:scale-[1.02]"
             >
-              {c.cta}
+              Quiero mi Landing Page
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-        ))}
+        </div>
+        <div data-reveal className="flex flex-col justify-between rounded-3xl border border-white/[0.07] bg-white/[0.025] p-7 sm:p-10">
+          <div>
+            <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-brand-cyan">Diseño web enfocado</span>
+            <h3 className="mt-5 text-xl font-semibold">Una presencia digital clara para tu próxima oportunidad.</h3>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Cada elemento está pensado para comunicar mejor, guiar la atención y facilitar que tus visitantes se pongan en contacto contigo.
+            </p>
+          </div>
+          <div className="mt-10 grid grid-cols-2 gap-3">
+            {[
+              ["01", "Mensaje claro"],
+              ["02", "Acción directa"],
+              ["03", "Experiencia móvil"],
+              ["04", "Carga optimizada"],
+            ].map(([number, label]) => (
+              <div key={number} className="rounded-2xl border border-white/[0.07] bg-black/20 p-4">
+                <span className="font-display text-sm text-brand-cyan">{number}</span>
+                <p className="mt-3 text-sm font-medium text-foreground">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SoporteTI() {
+  const services = [
+    { icon: Monitor, label: "Formateo e instalación de Windows" },
+    { icon: Cpu, label: "Cambio de HDD por SSD" },
+    { icon: ShieldCheck, label: "Eliminación de virus y optimización" },
+    { icon: LifeBuoy, label: "Respaldo y recuperación de información" },
+    { icon: Wrench, label: "Instalación y configuración de programas" },
+    { icon: Wrench, label: "Instalación y configuración de impresoras" },
+    { icon: Headset, label: "Mantenimiento de computadores de escritorio" },
+  ];
+
+  return (
+    <section id="soporte" className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
+      <div data-reveal className="rounded-3xl border border-white/[0.07] bg-gradient-to-b from-white/[0.04] to-transparent p-7 sm:p-12">
+        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="h-1 w-1 rounded-full bg-brand-cyan" />
+              Soporte TI
+            </span>
+            <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">SOPORTE TI</h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">Soluciones para mantener tus equipos funcionando correctamente.</p>
+          </div>
+          <a
+            href={WHATSAPP_SOPORTE}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full gradient-blue px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_12px_40px_-14px_rgba(31,107,255,0.9)] transition-transform hover:scale-[1.02]"
+          >
+            Solicitar soporte TI
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+        <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex min-h-24 items-center gap-4 rounded-2xl border border-white/[0.07] bg-[#080b12]/70 p-5 transition-colors hover:border-brand/45">
+              <Icon className="h-5 w-5 shrink-0 text-brand-cyan" strokeWidth={1.5} />
+              <span className="text-sm font-medium uppercase leading-snug tracking-wide text-foreground">{label}</span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 flex flex-col gap-3 border-t border-white/[0.07] pt-7 text-sm text-muted-foreground sm:flex-row sm:gap-8">
+          <span><strong className="font-medium text-foreground">Soporte presencial</strong> — Santiago y alrededores</span>
+          <span><strong className="font-medium text-foreground">Soporte remoto</strong> — Todo Chile</span>
+        </div>
       </div>
     </section>
   );
@@ -342,26 +374,24 @@ function Servicios() {
 
 function Diferenciadores() {
   const items = [
-    { n: "01", icon: Monitor, title: "Diseño profesional", desc: "A la medida de la identidad de tu negocio." },
+    { n: "01", icon: Monitor, title: "Diseño profesional", desc: "Soluciones adaptadas a cada necesidad." },
     { n: "02", icon: MessageSquare, title: "Atención personalizada", desc: "Comunicación directa durante todo el proyecto." },
     { n: "03", icon: Cpu, title: "Tecnología actual", desc: "Soluciones modernas, rápidas y optimizadas." },
-    { n: "04", icon: LifeBuoy, title: "Acompañamiento", desc: "Te ayudamos antes, durante y después de la implementación." },
+    { n: "04", icon: LifeBuoy, title: "Soporte cercano", desc: "Acompañamiento durante todo el proceso." },
   ];
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((it) => (
-          <div
-            key={it.n}
-            data-reveal
-            className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 transition-colors hover:border-brand/40"
-          >
+      <SectionHeading eyebrow="CGL Digital" title="¿POR QUÉ CGL DIGITAL?" />
+      <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map(({ n, icon: Icon, title, desc }) => (
+          <div key={n} data-reveal className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 transition-colors hover:border-brand/40">
             <div className="flex items-center justify-between">
-              <it.icon className="h-5 w-5 text-brand-cyan" strokeWidth={1.5} />
-              <span className="font-display text-sm text-muted-foreground/60">{it.n}</span>
+              <Icon className="h-5 w-5 text-brand-cyan" strokeWidth={1.5} />
+              <span className="font-display text-sm text-muted-foreground/60">{n}</span>
             </div>
-            <h3 className="mt-5 text-sm font-semibold uppercase tracking-wide">{it.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
+            <h3 className="mt-5 text-sm font-semibold uppercase tracking-wide">{title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
           </div>
         ))}
       </div>
@@ -369,135 +399,23 @@ function Diferenciadores() {
   );
 }
 
-function Portafolio() {
-  const projects = [
-    { img: pVet, name: "VidaPet", type: "Landing Page", desc: "Sitio para una clínica veterinaria con agenda de contacto y WhatsApp." },
-    { img: pDental, name: "Clínica Dental", type: "Landing Page", desc: "Página de servicios odontológicos enfocada en captar consultas." },
-    { img: pCorporate, name: "Sitio Corporativo", type: "Sitio web corporativo", desc: "Presencia profesional multi-sección para una empresa de servicios." },
-    { img: pRestaurant, name: "Restaurante", type: "Landing Page", desc: "Carta, ubicación y reservas con contacto directo por WhatsApp." },
-    { img: pRealestate, name: "Inmobiliaria", type: "Sitio web corporativo", desc: "Catálogo de propiedades con formulario de contacto integrado." },
-  ];
-  return (
-    <section id="portafolio" className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
-      <SectionHeading
-        eyebrow="Portafolio"
-        title="Proyectos destacados"
-        subtitle="Algunos proyectos y experiencias digitales desarrolladas por CGL Digital."
-      />
-      <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p) => (
-          <article
-            key={p.name}
-            data-reveal
-            className="group overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] transition-all duration-500 hover:-translate-y-1 hover:border-brand/50"
-          >
-            <div className="overflow-hidden border-b border-white/[0.06]">
-              <img
-                src={p.img}
-                alt={`Vista previa del proyecto ${p.name} desarrollado por CGL Digital`}
-                loading="lazy"
-                width={1200}
-                height={800}
-                className="aspect-[16/10] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-            </div>
-            <div className="p-6">
-              <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-brand-cyan">{p.type}</span>
-              <h3 className="mt-2 text-base font-semibold">{p.name}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function SoporteTI() {
-  const items = [
-    { icon: Headset, label: "Soporte remoto" },
-    { icon: Wrench, label: "Configuración" },
-    { icon: ShieldCheck, label: "Diagnóstico" },
-    { icon: Monitor, label: "Windows" },
-    { icon: Wifi, label: "Redes" },
-    { icon: Mail, label: "Microsoft 365" },
-    { icon: LifeBuoy, label: "Asistencia a usuarios" },
-  ];
-  return (
-    <section id="soporte" className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
-      <div
-        data-reveal
-        className="grid grid-cols-1 items-center gap-10 rounded-3xl border border-white/[0.07] bg-gradient-to-b from-white/[0.04] to-transparent p-7 sm:p-12 lg:grid-cols-2 lg:gap-14"
-      >
-        <div className="min-w-0">
-          <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-            <span className="h-1 w-1 rounded-full bg-brand-cyan" />
-            Soporte TI
-          </span>
-          <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
-            ¿Tienes un problema con tu <span className="gradient-text">computador</span> o sistema?
-          </h2>
-          <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-            Te ayudamos a diagnosticar y resolver problemas tecnológicos de forma rápida y sencilla, incluso de manera remota.
-          </p>
-          <ul className="mt-7 flex flex-wrap gap-2.5">
-            {items.map((it) => (
-              <li
-                key={it.label}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs text-muted-foreground"
-              >
-                <it.icon className="h-4 w-4 shrink-0 text-brand-cyan" strokeWidth={1.5} />
-                {it.label}
-              </li>
-            ))}
-          </ul>
-          <a
-            href={WHATSAPP_SOPORTE}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full gradient-blue px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_12px_40px_-14px_rgba(31,107,255,0.9)] transition-transform hover:scale-[1.02]"
-          >
-            Solicitar soporte TI
-            <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
-        <div className="relative min-w-0">
-          <img
-            src={soporteImg}
-            alt="Equipos y redes atendidos por el servicio de soporte TI de CGL Digital"
-            loading="lazy"
-            width={1024}
-            height={768}
-            className="w-full rounded-2xl border border-white/[0.07] object-cover"
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Proceso() {
   const steps = [
-    { n: "01", title: "Cuéntanos lo que necesitas", desc: "Explícanos tu proyecto, idea o problema." },
-    { n: "02", title: "Proponemos una solución", desc: "Analizamos tus necesidades y definimos la mejor alternativa." },
-    { n: "03", title: "Lo hacemos realidad", desc: "Implementamos la solución y te acompañamos durante el proceso." },
+    { n: "01", title: "Cuéntanos lo que necesitas" },
+    { n: "02", title: "Proponemos una solución" },
+    { n: "03", title: "Lo hacemos realidad" },
   ];
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
       <SectionHeading eyebrow="Proceso" title="Cómo trabajamos" />
       <div className="relative mt-14">
-        <div
-          aria-hidden
-          className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-brand/40 to-transparent lg:block"
-        />
+        <div aria-hidden className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-brand/40 to-transparent lg:block" />
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {steps.map((s) => (
-            <div key={s.n} data-reveal className="relative">
-              <div className="grid h-12 w-12 place-items-center rounded-full border border-brand/40 bg-[#05070d] font-display text-sm font-semibold text-brand-cyan">
-                {s.n}
-              </div>
-              <h3 className="mt-5 text-base font-semibold uppercase tracking-wide">{s.title}</h3>
-              <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+          {steps.map((step) => (
+            <div key={step.n} data-reveal className="relative">
+              <div className="grid h-12 w-12 place-items-center rounded-full border border-brand/40 bg-[#05070d] font-display text-sm font-semibold text-brand-cyan">{step.n}</div>
+              <h3 className="mt-5 text-base font-semibold uppercase tracking-wide">{step.title}</h3>
             </div>
           ))}
         </div>
@@ -506,56 +424,37 @@ function Proceso() {
   );
 }
 
-function Nosotros() {
-  return (
-    <section id="nosotros" className="mx-auto max-w-4xl px-4 py-20 text-center sm:py-28">
-      <SectionHeading eyebrow="Nosotros" title="Tecnología cercana y profesional" />
-      <p data-reveal className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-        CGL Digital busca entregar soluciones digitales profesionales, accesibles y personalizadas para emprendedores y
-        empresas. Trabajamos con comunicación directa, propuestas a medida y acompañamiento en cada etapa: desde la idea
-        inicial hasta la puesta en marcha y el soporte posterior.
-      </p>
-    </section>
-  );
-}
-
 function Contacto() {
   const [sent, setSent] = useState(false);
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      body: formData,
+      body: new FormData(form),
     });
+
     if (response.ok) {
       setSent(true);
-      setTimeout(() => setSent(false), 3500);
+      window.setTimeout(() => setSent(false), 3500);
       form.reset();
-    } else {
-      alert("Hubo un error al enviar el formulario. Intenta nuevamente.");
+      return;
     }
+
+    alert("Hubo un error al enviar el formulario. Intenta nuevamente.");
   };
 
   return (
     <section id="contacto" className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
-      <div
-        data-reveal
-        className="grid grid-cols-1 gap-12 rounded-3xl border border-white/[0.07] bg-gradient-to-b from-white/[0.04] to-transparent p-7 sm:p-12 lg:grid-cols-2 lg:gap-16"
-      >
+      <div data-reveal className="grid grid-cols-1 gap-12 rounded-3xl border border-white/[0.07] bg-gradient-to-b from-white/[0.04] to-transparent p-7 sm:p-12 lg:grid-cols-2 lg:gap-16">
         <div className="min-w-0">
           <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
             <span className="h-1 w-1 rounded-full bg-brand-cyan" />
             Contacto
           </span>
-          <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
-            Hablemos de tu <span className="gradient-text">proyecto</span>
-          </h2>
-          <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
-            Cuéntanos qué necesitas y evaluaremos contigo la mejor solución.
-          </p>
+          <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">HABLEMOS DE TU <span className="gradient-text">PROYECTO</span></h2>
+          <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">Cuéntanos qué necesitas y te ayudaremos a encontrar la mejor solución.</p>
           <a
             href={WHATSAPP_URL}
             target="_blank"
@@ -567,10 +466,7 @@ function Contacto() {
           </a>
         </div>
 
-        <form
-          onSubmit={onSubmit}
-          className="rounded-2xl border border-white/[0.07] bg-[#080b12]/70 p-6 backdrop-blur-sm sm:p-8"
-        >
+        <form onSubmit={onSubmit} className="rounded-2xl border border-white/[0.07] bg-[#080b12]/70 p-6 backdrop-blur-sm sm:p-8">
           <input type="hidden" name="access_key" value="c234cc7e-8e71-4171-ba82-99dff6d86a86" />
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Field label="Nombre" name="name" placeholder="Tu nombre" required />
@@ -579,20 +475,8 @@ function Contacto() {
           <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Field label="Teléfono / WhatsApp" name="phone" type="tel" placeholder="+56 9 ..." />
             <div>
-              <label
-                htmlFor="service"
-                className="mb-2 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground"
-              >
-                Tipo de servicio
-              </label>
-              <select
-                id="service"
-                name="service"
-                required
-                defaultValue="Diseño Web"
-                className="w-full rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-foreground outline-none transition-all focus:border-brand/60 focus:ring-2 focus:ring-brand/25"
-              >
-                <option className="bg-[#080b12]">Diseño Web</option>
+              <label htmlFor="service" className="mb-2 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Tipo de servicio</label>
+              <select id="service" name="service" required defaultValue="Landing Page" className="w-full rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-foreground outline-none transition-all focus:border-brand/60 focus:ring-2 focus:ring-brand/25">
                 <option className="bg-[#080b12]">Landing Page</option>
                 <option className="bg-[#080b12]">Soporte TI</option>
                 <option className="bg-[#080b12]">Otro</option>
@@ -600,27 +484,11 @@ function Contacto() {
             </div>
           </div>
           <div className="mt-5">
-            <label
-              htmlFor="details"
-              className="mb-2 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground"
-            >
-              Mensaje
-            </label>
-            <textarea
-              id="details"
-              name="details"
-              required
-              rows={5}
-              placeholder="Cuéntanos sobre tu proyecto, idea o problema…"
-              maxLength={2000}
-              className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground/60 focus:border-brand/60 focus:ring-2 focus:ring-brand/25"
-            />
+            <label htmlFor="details" className="mb-2 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Mensaje</label>
+            <textarea id="details" name="details" required rows={5} placeholder="Cuéntanos sobre tu proyecto o necesidad…" maxLength={2000} className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground/60 focus:border-brand/60 focus:ring-2 focus:ring-brand/25" />
           </div>
-          <button
-            type="submit"
-            className="group mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full gradient-blue px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_12px_40px_-14px_rgba(31,107,255,0.9)] transition-transform hover:scale-[1.01]"
-          >
-            {sent ? "Mensaje enviado ✓" : "Solicitar cotización"}
+          <button type="submit" className="group mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full gradient-blue px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_12px_40px_-14px_rgba(31,107,255,0.9)] transition-transform hover:scale-[1.01]">
+            {sent ? "Mensaje enviado" : "Solicitar cotización"}
             {!sent && <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />}
           </button>
         </form>
@@ -629,33 +497,11 @@ function Contacto() {
   );
 }
 
-function Field({
-  label,
-  name,
-  type = "text",
-  placeholder,
-  required,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  placeholder?: string;
-  required?: boolean;
-}) {
+function Field({ label, name, type = "text", placeholder, required }: { label: string; name: string; type?: string; placeholder?: string; required?: boolean }) {
   return (
     <div>
-      <label htmlFor={name} className="mb-2 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-        {label}
-      </label>
-      <input
-        id={name}
-        type={type}
-        name={name}
-        required={required}
-        placeholder={placeholder}
-        maxLength={200}
-        className="w-full rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground/60 focus:border-brand/60 focus:ring-2 focus:ring-brand/25"
-      />
+      <label htmlFor={name} className="mb-2 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{label}</label>
+      <input id={name} type={type} name={name} required={required} placeholder={placeholder} maxLength={200} className="w-full rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground/60 focus:border-brand/60 focus:ring-2 focus:ring-brand/25" />
     </div>
   );
 }
@@ -670,13 +516,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 function FloatingWhatsApp() {
   return (
-    <a
-      href={WHATSAPP_URL}
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Hablar por WhatsApp"
-      className="fixed bottom-6 right-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_10px_40px_-8px_rgba(37,211,102,0.7)] transition-transform hover:scale-110"
-    >
+    <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" aria-label="Hablar por WhatsApp" className="fixed bottom-6 right-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_10px_40px_-8px_rgba(37,211,102,0.7)] transition-transform hover:scale-110">
       <WhatsAppIcon className="h-7 w-7" />
     </a>
   );
@@ -688,48 +528,17 @@ function Footer() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-3">
         <div>
           <img src={cglLogo} alt="CGL Digital" className="h-11 w-auto object-contain" />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Soluciones digitales para emprendedores y empresas.
-          </p>
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">Soluciones digitales para emprendedores y empresas.</p>
         </div>
         <nav className="grid grid-cols-2 gap-x-6 gap-y-2.5 self-start">
-          {NAV_LINKS.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              {l.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) => <a key={link.href} href={link.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{link.label}</a>)}
         </nav>
         <div className="space-y-3">
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
-            WhatsApp
-          </a>
-          <a
-            href="#contacto"
-            className="flex items-center gap-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <Mail className="h-4 w-4 text-brand-cyan" strokeWidth={1.5} />
-            Formulario de contacto
-          </a>
-          <a
-            href="https://cgldigital.cl"
-            className="flex items-center gap-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <Globe className="h-4 w-4 text-brand-cyan" strokeWidth={1.5} />
-            cgldigital.cl
-          </a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="flex items-center gap-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"><WhatsAppIcon className="h-4 w-4 text-[#25D366]" />WhatsApp</a>
+          <a href="#contacto" className="flex items-center gap-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"><Mail className="h-4 w-4 text-brand-cyan" strokeWidth={1.5} />Formulario de contacto</a>
         </div>
       </div>
-      <div className="border-t border-white/[0.06] px-4 py-6">
-        <p className="text-center text-xs text-muted-foreground">
-          © 2026 CGL Digital. Todos los derechos reservados.
-        </p>
-      </div>
+      <div className="border-t border-white/[0.06] px-4 py-6"><p className="text-center text-xs text-muted-foreground">© 2026 CGL Digital. Todos los derechos reservados.</p></div>
     </footer>
   );
 }

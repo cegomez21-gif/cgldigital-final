@@ -77,10 +77,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CGL Digital | Diseño Web Profesional" },
-      { name: "description", content: "Creamos páginas web modernas, rápidas y optimizadas para ayudar a empresas y emprendedores a conseguir más clientes y fortalecer su presencia digital." },
-      { property: "og:title", content: "CGL Digital | Diseño Web Profesional" },
-      { property: "og:description", content: "Creamos páginas web modernas, rápidas y optimizadas para ayudar a empresas y emprendedores a conseguir más clientes y fortalecer su presencia digital." },
+      { title: "CGL Digital | Landing Pages y Soporte TI" },
+      { name: "description", content: "Landing Pages profesionales y soporte TI para emprendedores y empresas en Santiago y todo Chile." },
+      { property: "og:title", content: "CGL Digital | Landing Pages y Soporte TI" },
+      { property: "og:description", content: "Landing Pages profesionales y soporte TI para emprendedores y empresas." },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "CGL Digital" },
       { property: "og:locale", content: "es_CL" },
@@ -111,7 +111,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <HeadContent />
       </head>
