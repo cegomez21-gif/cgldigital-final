@@ -81,7 +81,7 @@ function Landing() {
           <Hero />
           <LandingPages />
           <SoporteTI />
-          <Diferenciadores />
+          <CtaBanda />
           <Contacto />
         </main>
         <Footer />
