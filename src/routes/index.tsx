@@ -1,28 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import {
-  ArrowRight,
-  Check,
-  Cpu,
-  Headset,
-  LifeBuoy,
-  Mail,
-  Menu,
-  MessageSquare,
-  Monitor,
-  Send,
-  ShieldCheck,
-  Wrench,
-  X,
-} from "lucide-react";
+import { ArrowRight, Check, Mail, Menu, Send, X } from "lucide-react";
 
-import heroComputer from "@/assets/ChatGPT_Image_13_ago_2026,_12_46_09_a.m.png";
+import heroComputer from "@/assets/hero-computer.png";
 import cglLogo from "@/assets/cgl-logo-dark.png";
+import iconWindows from "@/assets/icons/windows.png";
+import iconSsd from "@/assets/icons/ssd.png";
+import iconShield from "@/assets/icons/shield.png";
+import iconDisk from "@/assets/icons/disk.png";
+import iconPuzzle from "@/assets/icons/puzzle.png";
+import iconPrinter from "@/assets/icons/printer.png";
+import iconWrench from "@/assets/icons/wrench.png";
 
 const WHATSAPP_URL =
   "https://wa.me/56976163109?text=Hola%2C%20quiero%20cotizar%20una%20soluci%C3%B3n%20con%20CGL%20Digital.";
 const WHATSAPP_SOPORTE =
   "https://wa.me/56976163109?text=Hola%2C%20necesito%20soporte%20TI%20con%20CGL%20Digital.";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -87,7 +81,7 @@ function Landing() {
           <Hero />
           <LandingPages />
           <SoporteTI />
-          <Diferenciadores />
+          <CtaBanda />
           <Contacto />
         </main>
         <Footer />
@@ -212,19 +206,24 @@ function Hero() {
           </a>
         </div>
         <p className="mt-7 text-xs text-muted-foreground sm:text-sm">
-          Diseño personalizado · Atención directa · Soporte cercano
+          Diseño personalizado · Atención directa
         </p>
       </div>
 
-      <div data-reveal className="flex min-w-0 items-center justify-center">
+      <div data-reveal className="relative flex min-w-0 items-center justify-center">
+        <div
+          aria-hidden
+          className="absolute bottom-6 left-1/2 h-16 w-[78%] -translate-x-1/2 rounded-[50%] bg-black/70 blur-2xl"
+        />
         <img
           src={heroComputer}
-          alt="Computador de escritorio negro con monitor, teclado y mouse iluminados en azul"
-          width={1536}
-          height={1024}
-          className="h-auto max-h-[560px] w-full object-contain"
+          alt="Computador de escritorio con monitor, teclado y mouse iluminados en azul sobre un escritorio oscuro"
+          width={1264}
+          height={843}
+          className="relative h-auto max-h-[520px] w-full object-contain [mask-image:radial-gradient(115%_105%_at_50%_45%,#000_62%,transparent_100%)]"
         />
       </div>
+
     </section>
   );
 }
@@ -245,71 +244,50 @@ function SectionHeading({ eyebrow, title, subtitle }: { eyebrow: string; title: 
 function LandingPages() {
   const features = [
     "Diseño personalizado",
-    "Diseño 100% responsive",
-    "Integración con WhatsApp",
+    "Adaptación a celulares y tablets",
+    "Botón de WhatsApp",
     "Formularios de contacto",
-    "Llamados a la acción",
-    "Optimización y rendimiento",
     "Integración con redes sociales",
     "SEO básico",
+    "Optimización y velocidad de carga",
+    "Llamados a la acción claros",
   ];
 
   return (
     <section id="landing-pages" className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
-      <SectionHeading
-        eyebrow="Landing Pages"
-        title="LANDING PAGES PROFESIONALES"
-        subtitle="Creamos Landing Pages modernas, rápidas y adaptadas a celulares para convertir visitantes en clientes."
-      />
-      <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-        <div data-reveal className="group relative overflow-hidden rounded-3xl border border-brand/25 bg-gradient-to-br from-[#0b1e48] via-[#081326] to-[#070a12] p-7 sm:p-10">
-          <div className="absolute -right-20 -top-24 h-72 w-72 rounded-full bg-brand/20 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
-          <div className="relative">
-            <div className="grid h-12 w-12 place-items-center rounded-xl border border-brand-cyan/30 bg-brand-cyan/10 text-brand-cyan">
-              <Monitor className="h-6 w-6" strokeWidth={1.5} />
-            </div>
-            <h3 className="mt-6 text-2xl font-semibold uppercase tracking-wide sm:text-3xl">Una página enfocada en resultados</h3>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Una Landing Page presenta un producto, servicio, emprendimiento o campaña con un objetivo claro: generar contactos y nuevos clientes.
-            </p>
-            <ul className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-cyan" strokeWidth={2.5} />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-            <a
-              href="#contacto"
-              className="mt-9 inline-flex min-h-12 items-center gap-2 rounded-full gradient-blue px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_12px_40px_-14px_rgba(31,107,255,0.9)] transition-transform hover:scale-[1.02]"
-            >
-              Quiero mi Landing Page
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
+      <div data-reveal className="rounded-3xl border border-white/[0.07] bg-gradient-to-b from-white/[0.04] to-transparent p-7 sm:p-12">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="h-1 w-1 rounded-full bg-brand-cyan" />
+            Diseño web
+          </span>
+          <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">LANDING PAGES</h2>
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+            Creamos Landing Pages personalizadas para negocios, emprendimientos y profesionales: una página clara,
+            rápida y pensada para que tus clientes te contacten.
+          </p>
         </div>
-        <div data-reveal className="flex flex-col justify-between rounded-3xl border border-white/[0.07] bg-white/[0.025] p-7 sm:p-10">
-          <div>
-            <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-brand-cyan">Diseño web enfocado</span>
-            <h3 className="mt-5 text-xl font-semibold">Una presencia digital clara para tu próxima oportunidad.</h3>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Cada elemento está pensado para comunicar mejor, guiar la atención y facilitar que tus visitantes se pongan en contacto contigo.
-            </p>
-          </div>
-          <div className="mt-10 grid grid-cols-2 gap-3">
-            {[
-              ["01", "Mensaje claro"],
-              ["02", "Acción directa"],
-              ["03", "Experiencia móvil"],
-              ["04", "Carga optimizada"],
-            ].map(([number, label]) => (
-              <div key={number} className="rounded-2xl border border-white/[0.07] bg-black/20 p-4">
-                <span className="font-display text-sm text-brand-cyan">{number}</span>
-                <p className="mt-3 text-sm font-medium text-foreground">{label}</p>
-              </div>
-            ))}
-          </div>
+
+        <ul className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-3 sm:grid-cols-2">
+          {features.map((feature) => (
+            <li
+              key={feature}
+              className="flex min-h-16 items-center gap-3 rounded-2xl border border-white/[0.07] bg-[#080b12]/70 px-5 py-4 transition-colors hover:border-brand/45"
+            >
+              <Check className="h-4 w-4 shrink-0 text-brand-cyan" strokeWidth={2.5} />
+              <span className="text-sm leading-snug text-foreground">{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-10 flex justify-center">
+          <a
+            href="#contacto"
+            className="inline-flex min-h-12 items-center gap-2 rounded-full gradient-blue px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-white transition-transform hover:scale-[1.02]"
+          >
+            Quiero mi Landing Page
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
       </div>
     </section>
@@ -318,13 +296,13 @@ function LandingPages() {
 
 function SoporteTI() {
   const services = [
-    { icon: Monitor, label: "Formateo e instalación de Windows" },
-    { icon: Cpu, label: "Cambio de HDD por SSD" },
-    { icon: ShieldCheck, label: "Eliminación de virus y optimización" },
-    { icon: LifeBuoy, label: "Respaldo y recuperación de información" },
-    { icon: Wrench, label: "Instalación y configuración de programas" },
-    { icon: Wrench, label: "Instalación y configuración de impresoras" },
-    { icon: Headset, label: "Mantenimiento de computadores de escritorio" },
+    { icon: iconWindows, label: "Formateo e instalación de Windows" },
+    { icon: iconSsd, label: "Cambio de HDD por SSD" },
+    { icon: iconShield, label: "Eliminación de virus y optimización" },
+    { icon: iconDisk, label: "Respaldo y recuperación de información" },
+    { icon: iconPuzzle, label: "Instalación y configuración de programas" },
+    { icon: iconPrinter, label: "Instalación y configuración de impresoras" },
+    { icon: iconWrench, label: "Mantención de computadores de escritorio" },
   ];
 
   return (
@@ -343,16 +321,16 @@ function SoporteTI() {
             href={WHATSAPP_SOPORTE}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full gradient-blue px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_12px_40px_-14px_rgba(31,107,255,0.9)] transition-transform hover:scale-[1.02]"
+            className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full gradient-blue px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-white transition-transform hover:scale-[1.02]"
           >
             Solicitar soporte TI
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ icon: Icon, label }) => (
+          {services.map(({ icon, label }) => (
             <div key={label} className="flex min-h-24 items-center gap-4 rounded-2xl border border-white/[0.07] bg-[#080b12]/70 p-5 transition-colors hover:border-brand/45">
-              <Icon className="h-5 w-5 shrink-0 text-brand-cyan" strokeWidth={1.5} />
+              <img src={icon} alt="" aria-hidden loading="lazy" width={96} height={96} className="h-7 w-7 shrink-0 object-contain" />
               <span className="text-sm font-medium uppercase leading-snug tracking-wide text-foreground">{label}</span>
             </div>
           ))}
@@ -366,32 +344,38 @@ function SoporteTI() {
   );
 }
 
-function Diferenciadores() {
-  const items = [
-    { n: "01", icon: Monitor, title: "Diseño profesional", desc: "Soluciones adaptadas a cada necesidad." },
-    { n: "02", icon: MessageSquare, title: "Atención personalizada", desc: "Comunicación directa durante todo el proyecto." },
-    { n: "03", icon: Cpu, title: "Tecnología actual", desc: "Soluciones modernas, rápidas y optimizadas." },
-    { n: "04", icon: LifeBuoy, title: "Soporte cercano", desc: "Acompañamiento durante todo el proceso." },
-  ];
-
+function CtaBanda() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
-      <SectionHeading eyebrow="CGL Digital" title="¿POR QUÉ CGL DIGITAL?" />
-      <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map(({ n, icon: Icon, title, desc }) => (
-          <div key={n} data-reveal className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 transition-colors hover:border-brand/40">
-            <div className="flex items-center justify-between">
-              <Icon className="h-5 w-5 text-brand-cyan" strokeWidth={1.5} />
-              <span className="font-display text-sm text-muted-foreground/60">{n}</span>
-            </div>
-            <h3 className="mt-5 text-sm font-semibold uppercase tracking-wide">{title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-          </div>
-        ))}
+    <section className="mx-auto max-w-6xl px-4 pb-4 pt-4">
+      <div data-reveal className="flex flex-col items-center gap-6 rounded-3xl border border-brand/25 bg-[#080d1a]/80 px-7 py-10 text-center sm:px-12">
+        <h2 className="max-w-2xl text-2xl font-semibold tracking-tight sm:text-3xl">
+          ¿Tienes un proyecto o necesitas <span className="gradient-text">soporte TI</span>? Hablemos.
+        </h2>
+        <p className="max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Escríbenos y te respondemos directamente para ver juntos la mejor solución.
+        </p>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+          >
+            <WhatsAppIcon className="h-5 w-5" />
+            Escríbenos por WhatsApp
+          </a>
+          <a
+            href="#contacto"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-white/[0.07]"
+          >
+            Enviar un mensaje
+          </a>
+        </div>
       </div>
     </section>
   );
 }
+
 
 function Contacto() {
   const [sent, setSent] = useState(false);
