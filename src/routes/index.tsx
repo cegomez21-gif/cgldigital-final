@@ -206,19 +206,24 @@ function Hero() {
           </a>
         </div>
         <p className="mt-7 text-xs text-muted-foreground sm:text-sm">
-          Diseño personalizado · Atención directa · Soporte cercano
+          Diseño personalizado · Atención directa
         </p>
       </div>
 
-      <div data-reveal className="flex min-w-0 items-center justify-center">
+      <div data-reveal className="relative flex min-w-0 items-center justify-center">
+        <div
+          aria-hidden
+          className="absolute bottom-6 left-1/2 h-16 w-[78%] -translate-x-1/2 rounded-[50%] bg-black/70 blur-2xl"
+        />
         <img
           src={heroComputer}
-          alt="Computador de escritorio negro con monitor, teclado y mouse iluminados en azul"
-          width={1536}
-          height={1024}
-          className="h-auto max-h-[560px] w-full object-contain"
+          alt="Computador de escritorio con monitor, teclado y mouse iluminados en azul sobre un escritorio oscuro"
+          width={1264}
+          height={843}
+          className="relative h-auto max-h-[520px] w-full object-contain [mask-image:radial-gradient(115%_105%_at_50%_45%,#000_62%,transparent_100%)]"
         />
       </div>
+
     </section>
   );
 }
