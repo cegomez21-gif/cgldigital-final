@@ -1,28 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import {
-  ArrowRight,
-  Check,
-  Cpu,
-  Headset,
-  LifeBuoy,
-  Mail,
-  Menu,
-  MessageSquare,
-  Monitor,
-  Send,
-  ShieldCheck,
-  Wrench,
-  X,
-} from "lucide-react";
+import { ArrowRight, Check, Mail, Menu, Send, X } from "lucide-react";
 
-import heroComputer from "@/assets/ChatGPT_Image_13_ago_2026,_12_46_09_a.m.png";
+import heroComputer from "@/assets/hero-computer.png";
 import cglLogo from "@/assets/cgl-logo-dark.png";
+import iconWindows from "@/assets/icons/windows.png";
+import iconSsd from "@/assets/icons/ssd.png";
+import iconShield from "@/assets/icons/shield.png";
+import iconDisk from "@/assets/icons/disk.png";
+import iconPuzzle from "@/assets/icons/puzzle.png";
+import iconPrinter from "@/assets/icons/printer.png";
+import iconWrench from "@/assets/icons/wrench.png";
 
 const WHATSAPP_URL =
   "https://wa.me/56976163109?text=Hola%2C%20quiero%20cotizar%20una%20soluci%C3%B3n%20con%20CGL%20Digital.";
 const WHATSAPP_SOPORTE =
   "https://wa.me/56976163109?text=Hola%2C%20necesito%20soporte%20TI%20con%20CGL%20Digital.";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
