@@ -205,22 +205,15 @@ function Hero() {
             Ver servicios
           </a>
         </div>
-        <p className="mt-7 text-xs text-muted-foreground sm:text-sm">
-          Diseño personalizado · Atención directa
-        </p>
       </div>
 
-      <div data-reveal className="relative flex min-w-0 items-center justify-center hero-image-wrap">
-        <div
-          aria-hidden
-          className="absolute bottom-6 left-1/2 h-16 w-[78%] -translate-x-1/2 rounded-[50%] bg-black/70 blur-2xl"
-        />
+      <div data-reveal className="relative flex min-w-0 items-center justify-center">
         <img
           src={heroComputer}
-          alt="Computador de escritorio con monitor, teclado y mouse iluminados en azul sobre un escritorio oscuro"
-          width={1264}
-          height={843}
-          className="relative h-auto max-h-[520px] w-full object-contain hero-image-blend"
+          alt="Monitor de escritorio con teclado y mouse sobre una mesa de madera con luz natural"
+          width={1280}
+          height={960}
+          className="relative h-auto max-h-[520px] w-full rounded-2xl object-contain shadow-[0_30px_70px_-30px_rgba(0,0,0,0.75)]"
         />
       </div>
 
