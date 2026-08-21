@@ -211,9 +211,9 @@ function Hero() {
         <img
           src={heroComputer}
           alt="Monitor de escritorio con teclado y mouse sobre una mesa de madera con luz natural"
-          width={1280}
-          height={960}
-          className="relative h-auto max-h-[520px] w-full rounded-2xl object-contain shadow-[0_30px_70px_-30px_rgba(0,0,0,0.75)]"
+          width={1536}
+          height={1024}
+          className="relative h-auto w-full max-w-3xl object-contain"
         />
       </div>
 
